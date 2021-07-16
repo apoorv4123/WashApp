@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="user">
+
+        <menu>
+
+
+            <item android:title="Chats"
+                android:id="@+id/chatsBtn"
+                android:icon="@drawable/ic_baseline_chat_24"/>
+
+            <item android:title="My Order"
+                android:id="@+id/myOrderBtn"
+                android:icon="@drawable/add_order"/>
+
+            <item android:title="My Cart"
+                android:id="@+id/myCartBtn"
+                android:icon="@drawable/shopping_cart"/>
+
+            <item android:title="Custom Maps"
+                android:id="@+id/nearbyPublicToiletBtn"
+                android:icon="@drawable/map_icon"/>
+
+            <item android:title="History"
+                android:id="@+id/historyBtn"
+                android:icon="@drawable/ic_baseline_history_24"/>
+
+
+        </menu>
+
+    </item>
+
+    <item android:title="App">
+
+        <menu>
+
+            <item android:title="Blogs"
+                android:id="@+id/blogsBtn"
+                android:icon="@drawable/blog_icon"/>
+
+            <item android:title="Share"
+                android:id="@+id/shareBtn"
+                android:icon="@drawable/share"/>
+
+            <item android:title="About Us"
+                android:id="@+id/aboutUsBtn"
+                android:icon="@drawable/about_us_logo"/>
+
+            <item android:title="LogOut"
+                android:id="@+id/logoutBtn"
+                android:icon="@drawable/logout"/>
+
+
+
+        </menu>
+    </item>
+</menu>

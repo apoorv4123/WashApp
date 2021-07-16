@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "224830972393",
+    "project_id": "menstruationcare-52744",
+    "storage_bucket": "menstruationcare-52744.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224830972393:android:f84937a4f4da3f8bf0ab78",
+        "android_client_info": {
+          "package_name": "com.rahulcodecamp.menstruationcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224830972393-kkqiot4p91k15hr1bco4hmrb8t1r7i8r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl4iVZriJJvVWVxAEnhfVymKCvjA-K3BI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224830972393-kkqiot4p91k15hr1bco4hmrb8t1r7i8r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
