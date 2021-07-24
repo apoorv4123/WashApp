@@ -49,24 +49,24 @@
             app:flexWrap="wrap"
             app:justifyContent="flex_start">
 
-            <TextView
-                android:id="@+id/timeRcv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:lineSpacingExtra="5dp"
-                android:textColor="@color/dark_gray"
-                android:textSize="12sp"
-                tools:text="12:00 AM" />
+<!--            <TextView-->
+<!--                android:id="@+id/timeRcv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:lineSpacingExtra="5dp"-->
+<!--                android:textColor="@color/dark_gray"-->
+<!--                android:textSize="12sp"-->
+<!--                tools:text="12:00 AM" />-->
 
             <TextView
                 android:id="@+id/tvRecvMsg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 tools:text="Hello World" />
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginLeft="16dp"-->
 
         </com.google.android.flexbox.FlexboxLayout>
 

@@ -25,6 +25,8 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageAdapterViewHolder> {
 
+    public static final int MSG_SENT = 0;
+    public static final int MSG_RCVD = 1;
     Context context;
     List<Message> messages;
     DatabaseReference messageDb;
@@ -53,8 +55,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageA
             holder.userName.setText(R.string.you);
             holder.userName.setTextColor(R.color.green);
             holder.tvRecvMsg.setText(message.getMessage());
+            holder.tvRecvMsg.setTextColor(Color.parseColor("#ffffff"));
             holder.tvRecvMsg.setGravity(Gravity.START);
-            holder.recvLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            holder.recvLayout.setBackgroundColor(Color.parseColor("#0000FF"));
         } else {
             holder.userName.setText(message.getName());
             holder.tvRecvMsg.setText(message.getMessage());
@@ -85,4 +88,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageA
 
         }
     }
+
+//    @Override
+//    public int getItemViewType(int position) {
+//        Message message = messages.get(position);
+//
+//        if (message.getName().equals(AllMethods.name)) {
+//            return MSG_SENT;
+//        }else{
+//            return MSG_RCVD;
+//        }
+//    }
 }

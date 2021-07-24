@@ -11,14 +11,18 @@ public class Users {  // we need this model class to crate database having these
 
     }
 
+    public Users(String uid, String name, String email) {
+        this.uid = uid;
+        this.name = name;
+        this.email = email;
+    }
+
     public Users(String uid, String name, String email, String imageUri) {
         this.uid = uid;
         this.name = name;
         this.email = email;
         this.imageUri = imageUri;
     }
-
-
 
     public String getUid() {
         return uid;
@@ -50,5 +54,15 @@ public class Users {  // we need this model class to crate database having these
 
     public void setImageUri(String imageUri) {
         this.imageUri = imageUri;
+    }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", imageUri='" + imageUri + '\'' +
+                '}';
     }
 }

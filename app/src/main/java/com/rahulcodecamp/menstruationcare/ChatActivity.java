@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -24,20 +23,19 @@ import com.google.firebase.database.ValueEventListener;
 import com.rahulcodecamp.menstruationcare.adapters.MessageAdapter;
 import com.rahulcodecamp.menstruationcare.models.AllMethods;
 import com.rahulcodecamp.menstruationcare.models.Message;
-import com.rahulcodecamp.menstruationcare.models.User;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
+public class ChatActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseDatabase database;
     DatabaseReference messagedb;
     MessageAdapter messageAdapter;
-    User u;
+    Users u;
     List<Message> messages;
 
     RecyclerView msgRv;
@@ -50,42 +48,43 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         init();
+        sendBtn = findViewById(R.id.sendBtn);
+        sendBtn.setOnClickListener(v -> {
+
+            if (!TextUtils.isEmpty(msgEdtv.getText().toString())) {
+                Message message = new Message(msgEdtv.getText().toString(), u.getName());
+                msgEdtv.setText("");
+                messagedb.push().setValue(message);
+            } else {
+                Toast.makeText(getApplicationContext(), "Type a Message", Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 
-    public void init() {
+    private void init() {
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        u = new User();
+        u = new Users();
 
-        msgRv = (RecyclerView) findViewById(R.id.msgRv);
-        msgEdtv = (EditText) findViewById(R.id.msgEdtv);
-        sendBtn = (ImageView) findViewById(R.id.sendBtn);
-        sendBtn.setOnClickListener(this);
+        msgRv = findViewById(R.id.msgRv);
+        msgEdtv = findViewById(R.id.msgEdtv);
+//        sendBtn = findViewById(R.id.sendBtn);
+//        sendBtn.setOnClickListener(this);
         messages = new ArrayList<>();
-
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        if (!TextUtils.isEmpty(msgEdtv.getText().toString())) {
-            Message message = new Message(msgEdtv.getText().toString(), u.getName());
-            msgEdtv.setText("");
-            messagedb.push().setValue(message);
-        } else {
-            Toast.makeText(getApplicationContext(), "Type a Message", Toast.LENGTH_SHORT).show();
-        }
     }
 
 //    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        return super.onCreateOptionsMenu(menu);
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        return super.onOptionsItemSelected(item);
+//    public void onClick(View v) {
+//
+//        if (!TextUtils.isEmpty(msgEdtv.getText().toString())) {
+//            Message message = new Message(msgEdtv.getText().toString(), u.getName());
+//            msgEdtv.setText("");
+//            messagedb.push().setValue(message);
+//        } else {
+//            Toast.makeText(getApplicationContext(), "Type a Message", Toast.LENGTH_SHORT).show();
+//        }
 //    }
 
     @Override
@@ -94,19 +93,21 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
         final FirebaseUser currentUser = auth.getCurrentUser();
 
+        assert currentUser != null;
         u.setUid(currentUser.getUid());
         u.setEmail(currentUser.getEmail());
 
         database.getReference("Users").child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                u = snapshot.getValue(User.class);
+            public void onDataChange(@NotNull DataSnapshot snapshot) {
+                u = snapshot.getValue(Users.class);
+                assert u != null;
                 u.setUid(currentUser.getUid());
                 AllMethods.name = u.getName();
             }
 
             @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+            public void onCancelled(@NotNull DatabaseError error) {
 
             }
         });
@@ -114,9 +115,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         messagedb = database.getReference("messages");
         messagedb.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+            public void onChildAdded(@NotNull DataSnapshot snapshot, String previousChildName) {
                 // This method will display all the messages
                 Message message = snapshot.getValue(Message.class);
+                assert message != null;
                 message.setKey(snapshot.getKey());
                 messages.add(message);
                 displayMessages(messages);
@@ -125,6 +127,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
                 Message message = snapshot.getValue(Message.class);
+                assert message != null;
                 message.setKey(snapshot.getKey());
 
                 List<Message> newMessages = new ArrayList<>();
@@ -145,6 +148,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
                 Message message = snapshot.getValue(Message.class);
+                assert message != null;
                 message.setKey(snapshot.getKey());
 
                 List<Message> newMessages = new ArrayList<>();

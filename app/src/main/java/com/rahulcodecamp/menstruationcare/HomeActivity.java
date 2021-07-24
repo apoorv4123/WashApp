@@ -114,7 +114,9 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case (R.id.chatsBtn):
+                        Log.i("CHATS", "Chats Activity started");
                         startActivity(new Intent(HomeActivity.this, ChatActivity.class));
+                        Log.i("CHATS", "Chats Activity opened");
                         break;
 
                     }
